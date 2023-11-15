@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Editar Cliente</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <section th:fragment="editarCliente">
+            <form th:action="@{/guardar}" method="POST" th:object="${persona}" class="was-validated">
+                <input type="hidden" name="idPersona" th:field="*{idPersona}"/>
+                
+                <div id="details" class="mt-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h2>[[#{persona-datos}]]</h2> <br/>
+                                        <h4>[[#{persona-editar}]]</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="nombre">[[#{persona-nombre}]]</label>
+                                            <input required="true" type="text" name="nombre" th:field="*{nombre}" class="form-control"/>
+                                            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error Nombre</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apellido">[[#{persona-apellido}]]</label>
+                                            <input required="true" type="text" name="apellido" th:field="*{apellido}" class="form-control"/>
+                                            <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error Apellido</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">[[#{persona-email}]]</label>
+                                            <input required="true" type="text" name="email" th:field="*{email}" class="form-control"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="telefono">[[#{persona-telefono}]]</label>
+                                            <input type="text" name="telefono" th:field="*{telefono}" class="form-control"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="saldo">[[#{persona-saldo}]]</label>
+                                            <input required="true" type="number" step="any" name="saldo" th:field="*{saldo}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section th:replace="~{layout/botonesEditar::botonesEditar}"></section>
+            </form>
+        </section>
+    </body>
+</html>
